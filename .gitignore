@@ -1,5 +1,9 @@
 /data/
+
 /java-service/.gradle/
 /java-service/build/
+/java-service/settings.gradle
+
 /payment-page/dist/
 /payment-page/node_modules/
+/payment-page/payment-page.iml

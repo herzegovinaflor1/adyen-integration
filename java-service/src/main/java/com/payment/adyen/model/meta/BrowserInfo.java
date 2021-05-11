@@ -1,5 +1,13 @@
 package com.payment.adyen.model.meta;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
+@AllArgsConstructor
 public class BrowserInfo {
     
     private String userAgent;
@@ -13,50 +21,7 @@ public class BrowserInfo {
 
     private BrowserInfo() { }
 
-    private BrowserInfo(String userAgent, String acceptHeader, String language, Integer colorDepth, Integer screenHeight, Integer screenWidth, Integer timeZoneOffset, boolean javaEnabled) {
-        this.userAgent = userAgent;
-        this.acceptHeader = acceptHeader;
-        this.language = language;
-        this.colorDepth = colorDepth;
-        this.screenHeight = screenHeight;
-        this.screenWidth = screenWidth;
-        this.timeZoneOffset = timeZoneOffset;
-        this.javaEnabled = javaEnabled;
-    }
-
-    public String getUserAgent() {
-        return userAgent;
-    }
-
-    public String getAcceptHeader() {
-        return acceptHeader;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public Integer getColorDepth() {
-        return colorDepth;
-    }
-
-    public Integer getScreenHeight() {
-        return screenHeight;
-    }
-
-    public Integer getScreenWidth() {
-        return screenWidth;
-    }
-
-    public Integer getTimeZoneOffset() {
-        return timeZoneOffset;
-    }
-
-    public boolean isJavaEnabled() {
-        return javaEnabled;
-    }
-
-    public static BrowserInfo.Builder builder() {
+    public static BrowserInfo.Builder defaultInfo() {
         return new BrowserInfo().new Builder();
     }
 

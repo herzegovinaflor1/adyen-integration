@@ -20,8 +20,8 @@ public class StoredAuthorizationRequestInputToAuthorizationRequestConverter impl
         card.setCvc(source.getCvc());
 
         var amountInfo = AmountInfo.builder()
-                .setCurrency(source.getCurrency())
-                .setValue(source.getValue())
+                .currency(source.getCurrency())
+                .value(source.getValue())
                 .build();
 
         Recurring recurring = new Recurring();

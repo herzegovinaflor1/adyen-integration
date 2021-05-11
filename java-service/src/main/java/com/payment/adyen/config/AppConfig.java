@@ -41,6 +41,7 @@ public class AppConfig {
 
     public AppConfig(PaymentRestTemplateErrorHandler paymentRestTemplateErrorHandler, Set<Converter<?, ?>> converters) throws ClassNotFoundException {
         Class.forName("com.payment.adyen.config.AppConfiguration");
+        Class.forName("com.payment.adyen.config.AdyenEndpoints");
         this.paymentRestTemplateErrorHandler = paymentRestTemplateErrorHandler;
         this.converters = converters;
     }

@@ -15,7 +15,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.16'
     compile group: 'net.jodah', name: 'failsafe', version: '2.4.0'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
 
@@ -27,6 +26,9 @@ dependencies {
     compile 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
     compile 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
     compile 'com.graphql-java:graphql-java-tools:5.2.4'
+
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
 }
 
 test {

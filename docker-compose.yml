@@ -21,9 +21,16 @@ services:
       - XAPIKey=${XAPIKey}
       - ISSUE_URL=${ISSUE_URL}
       - SHOPPER_EMAIL=${SHOPPER_EMAIL}
+      - AUTHORIZATION=${AUTHORIZATION}
+      - AUTHORIZATION_3D=${AUTHORIZATION_3D}
+      - CAPTURE=${CAPTURE}
+      - CANCEL=${CANCEL}
+      - REFUND=${REFUND}
+      - RECURRING_PAYMENTS=${RECURRING_PAYMENTS}
+      - DISABLE_RECURRING_PAYMENTS=${DISABLE_RECURRING_PAYMENTS}
     ports:
       - "${PAYMENT_WEB_PORT}:${PAYMENT_WEB_PORT}"
-      - 8000:8000
+      - "${PAYMENT_DEBUG_PORT}:${PAYMENT_DEBUG_PORT}"
     links:
       - mongo
   mongo:
@@ -36,4 +43,4 @@ services:
     volumes:
       - ./data:/data/db
     ports:
-      - "27017:27017"
+      - "${MONGO_PAGE_PORT}:${MONGO_PAGE_PORT}"

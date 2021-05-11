@@ -20,8 +20,8 @@ public class AuthorizationRequestInputToAuthorizationRequestConverter implements
                 .setCardEncryptedJson(source.getCardEncryptedJson())
                 .build();
         var amountInfo = AmountInfo.builder()
-                .setCurrency(source.getCurrency())
-                .setValue(source.getValue())
+                .currency(source.getCurrency())
+                .value(source.getValue())
                 .build();
 
 

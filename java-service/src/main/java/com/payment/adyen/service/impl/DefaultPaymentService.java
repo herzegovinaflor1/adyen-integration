@@ -44,7 +44,7 @@ public class DefaultPaymentService implements PaymentService {
 
     @Override
     public CaptureResponse capture(CaptureRequest captureRequest) {
-        if (isAuthorized(captureRequest.getPaymentId())) {
+        if (checkForOperation(Operation.AUTHORIZATION, captureRequest.getPaymentId())) {
             return paymentApiClientService.capture(captureRequest);
         }
         throw new IllegalPaymentOperation("Capture operation is not applicable. Make sure you have appropriate payment status");
@@ -52,7 +52,7 @@ public class DefaultPaymentService implements PaymentService {
 
     @Override
     public CancelResponse cancel(CancelRequest cancelRequest) {
-        if (isAuthorized(cancelRequest.getPaymentId())) {
+        if (checkForOperation(Operation.AUTHORIZATION, cancelRequest.getPaymentId())) {
             return paymentApiClientService.cancel(cancelRequest);
         }
         throw new IllegalPaymentOperation("Cancel operation is not applicable. Make sure you have appropriate payment status");
@@ -60,7 +60,7 @@ public class DefaultPaymentService implements PaymentService {
 
     @Override
     public RefundResponse refund(RefundRequest refundRequest) {
-        if (isCaptured(refundRequest.getPaymentId())) {
+        if (checkForOperation(Operation.CAPTURE, refundRequest.getPaymentId())) {
             return paymentApiClientService.refund(refundRequest);
         }
         throw new IllegalPaymentOperation("Refund operation is not applicable. Make sure you have appropriate payment status");
@@ -104,20 +104,11 @@ public class DefaultPaymentService implements PaymentService {
         return paymentApiClientService.disableStoredPayment(disableRecurringRequest);
     }
 
-    // TODO: refactor
-    private boolean isAuthorized(Integer orderId) {
+    private boolean checkForOperation(Operation operation, Integer orderId) {
         var paymentInfoByOrderId = getLastPaymentInfoByOrderId(orderId);
         return paymentInfoByOrderId.getOperation().stream().reduce((_ignore, last) -> last)
-                .map(lastOperation -> lastOperation.equals(Operation.AUTHORIZATION.name()))
+                .map(lastOperation -> lastOperation.equals(operation.name()))
                 .orElse(false);
     }
-
-    private boolean isCaptured(Integer orderId) {
-        var paymentInfoByOrderId = getLastPaymentInfoByOrderId(orderId);
-        return paymentInfoByOrderId.getOperation().stream().reduce((_ignore, last) -> last)
-                .map(lastOperation -> lastOperation.equals(Operation.CAPTURE.name()))
-                .orElse(false);
-    }
-    ///########
 
 }

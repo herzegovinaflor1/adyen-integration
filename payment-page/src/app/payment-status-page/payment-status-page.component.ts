@@ -66,8 +66,6 @@ export class PaymentStatusPageComponent implements OnInit {
 
   refund(index: number): void {
     const payment = this.payments[index];
-    console.log(payment);
-    // TODO: in payment.pspReference make objects to differentiate psp references
     this.paymentService.refund({
       refund: {
         paymentId: payment.paymentId,

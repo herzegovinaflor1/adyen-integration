@@ -18,7 +18,7 @@ public class BasicAuthorizationRequest extends AuthorizationRequest {
     private String merchantAccount;
 
     private final String issuerUrl = AppConfiguration.ISSUE_URL;
-    private final BrowserInfo browserInfo = BrowserInfo.builder().buildDefault();
+    private final BrowserInfo browserInfo = BrowserInfo.defaultInfo().buildDefault();
     private final String shopperEmail = AppConfiguration.SHOPPER_EMAIL;
     private final String shopperIP = AppConfiguration.SHOPPER_IP;
     private final String shopperReference = AppConfiguration.SHOPPER_REFERENCE;
