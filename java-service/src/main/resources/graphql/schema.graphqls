@@ -1,0 +1,114 @@
+input AuthorizationRequestInput {
+    value: String
+    currency: String
+    cardEncryptedJson: String
+    stored: Boolean
+    uuid: String
+}
+
+input StoredAuthorizationRequestInput {
+    value: String
+    currency: String
+    selectedRecurringDetailReference: String
+    cvc: String
+    uuid: String
+}
+
+input CaptureRequestInput {
+    paymentId: Int
+    originalReference: String
+    modificationAmount: CaptureModificationAmount!
+    uuid: String
+}
+
+input CancelRequestInput {
+    paymentId: Int
+    originalReference: String
+    uuid: String
+}
+
+input RefundRequestInput {
+    paymentId: Int
+    originalReference: String
+    uuid: String
+}
+
+input DisableRecurringRequestInput {
+    recurringDetailReference: String
+    uuid: String
+}
+
+type AuthorizationResult {
+    md: String
+    paRequest: String
+    issuerUrl: String
+    pspReference: String
+    resultCode: String
+    authCode: String
+    creationDate: String
+    currency: String
+    value: Int
+}
+
+type CaptureResult {
+    pspReference: String
+    response: String
+}
+
+type CancelResult {
+    pspReference: String
+    response: String
+}
+
+type RefundResult {
+    pspReference: String
+    response: String
+}
+
+type DisableRecurringResult {
+    response: String
+}
+
+input CaptureModificationAmount {
+    value: Int
+    currency: String
+}
+
+type PaymentInfo {
+    paymentId: Int
+    resultCode: String
+    authCode: String
+    currency: String
+    value: Int
+    pspReference: [String]
+    operation: [String]
+    creationDate: [String]
+}
+
+type Card {
+    expiryMonth: String
+    expiryYear: String
+    holderName: String
+    number: String
+}
+
+type StoredPaymentDetail {
+    paymentMethodVariant: String
+    recurringDetailReference: String
+    card: Card
+}
+
+type Query {
+    paymentsInfo(pageNumber: Int):[PaymentInfo]
+    storedPayments:[StoredPaymentDetail]
+    pages:Int
+}
+
+type Mutation {
+    authorize(authorizeRequest: AuthorizationRequestInput):AuthorizationResult
+    authorizeStored(storedAuthorizeRequest: StoredAuthorizationRequestInput):AuthorizationResult
+    capture(captureRequest: CaptureRequestInput):CaptureResult
+    cancel(cancelRequest: CancelRequestInput):CancelResult
+    refund(refundRequest: RefundRequestInput):RefundResult
+    removeStoredPayment(disableRecurringRequest: DisableRecurringRequestInput):DisableRecurringResult
+}

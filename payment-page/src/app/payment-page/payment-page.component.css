@@ -1,0 +1,171 @@
+.cardFront {
+  background-color: #498ee4;
+  width: 390px;
+  border-radius: 6px;
+  padding: 20px;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: white;
+}
+
+.imageContainer {
+  width: 100%;
+  position: relative;
+  height: 55px;
+  margin-bottom: 5px;
+  line-height: 55px;
+}
+
+.imageContainer img {
+  right: 0;
+  top: 0;
+}
+
+.amount {
+  font-size: 12px;
+}
+
+.amount strong {
+  font-size: 14px;
+}
+
+.cardImage {
+  float: right;
+  height: 100%;
+}
+
+.cardImage i {
+  font-size: 40px;
+}
+
+.cardNumber,
+.cardHolder {
+  width: 100%;
+  color: #333333;
+}
+
+.cardholderContainer {
+  width: 60%;
+  display: inline-block;
+}
+
+.expContainer {
+  margin-left: 10px;
+  width: 32%;
+  display: inline-block;
+  float: right;
+}
+
+.cardMonth {
+  width: 45% !important;
+  color: #333333;
+}
+
+.cardYear {
+  width: 45%;
+  float: right;
+  color: #333333;
+}
+
+.cvcContainer {
+  width: 110px;
+  right: -115px;
+  bottom: -10px;
+  box-sizing: border-box;
+  padding-top: 10px;
+}
+
+.cvcContainer label {
+  width: 100%;
+}
+
+.cvcContainer p {
+  font-size: 6px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  letter-spacing: .5px;
+}
+
+.cardCvc {
+  width: 60px;
+  margin-bottom: 0;
+  color: #333333;
+}
+
+.cardStripe {
+  width: 100%;
+  height: 55px;
+  background-color: #3d5266;
+  right: 0;
+}
+
+.cardBack {
+  top: 40px;
+  right: 0;
+  z-index: -2;
+}
+
+.paymentContent {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #cecece;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.productInfoContent {
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+}
+
+.productList{
+  margin-top: 20px;
+  display: block;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paymentInfoBlock {
+  border: 1px solid #cecece;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.warning {
+  padding: 20px;
+  background-color: #FFDB99;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  border: 3px solid #ffa700;
+  font-size: 20px;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.remove {
+  background-color: #ff0000;
+}
+
+.disabledCard {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+
+.invalidField {
+  border: 1px solid red;
+}

@@ -1,0 +1,121 @@
+<div class="warning">
+  Please, do not enter any real payment information. Here is a <a
+  href="https://docs.adyen.com/development-resources/test-cards/test-card-numbers">list</a> of test cards
+</div>
+<div class="paymentContent">
+  <div class="cardFront">
+
+    <div style="padding-bottom: 10px">
+      <div style="display: grid">
+        <label>
+          Supported cards
+        </label>
+        <div>
+          <img src="assets/card/visa.png" width="50" [ngClass]="{disabledCard : disabledCard === 'visa'}"/>
+          <img src="assets/card/mastercard.png" width="50" [ngClass]="{disabledCard : disabledCard === 'master'}"/>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-bottom: 10px">
+      <label>
+        Card Number
+      </label>
+      <input [(ngModel)]="cardNumber" type="text"
+             class="cardNumber" placeholder="1234 5678 9101 1112"
+             (keypress)="inputNumberValidation($event)"
+             (keydown.backspace)="inputNumberValidation($event)"
+             (change)="validateCard()"/>
+    </div>
+
+    <div class="cardholderContainer">
+      <label>Card Holder
+      </label>
+      <input [(ngModel)]="holderName" type="text" class="cardHolder"
+             placeholder="e.g. John Doe"/>
+    </div>
+
+    <div class="expContainer">
+      <label>
+        Expiration
+      </label>
+      <input [(ngModel)]="expMonth" class="cardMonth" type="text"
+             placeholder="MM" max="12" min="1"
+             (keypress)="inputNumberValidation($event)"
+             (keydown.backspace)="inputNumberValidation($event)"
+      />
+      <input [(ngModel)]="expYear" class="cardYear"
+             type="text" placeholder="YY" max="99" min="00"
+             (keypress)="inputNumberValidation($event)"
+             (keydown.backspace)="inputNumberValidation($event)"
+      />
+    </div>
+
+    <div class="cvcContainer">
+      <label>CVC/CVV</label>
+      <input [(ngModel)]="cvc" class="cardCvc" placeholder="XXX" type="text"
+             max="999" min="000"
+      />
+      <p>Last 3 digits</p>
+    </div>
+
+    <div style="display: flex; position: relative" *ngIf="!selectedStoredPayment">
+      <label>Store this card</label>
+      <input style="margin-left: 10px" [(ngModel)]="storeCurrentCard" type="checkbox"/>
+    </div>
+
+    <div *ngIf="storedPayments.length > 0">
+      Stored cards
+      <select [(ngModel)]="selectedStoredPaymentsMod" style="color: #333333">
+        <!--Supplement an id here instead of using 'name'-->
+        <option *ngFor="let storedPayment of storedPayments; let idx = index" [ngValue]="idx">**** **** ****
+          **** {{storedPayment.card.number}}</option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedStoredPayment">
+      <button type="button" class="btn btn-primary button remove" (click)="removeCard()">Remove stored card</button>
+    </div>
+  </div>
+  <div class="paymentInfoBlock">
+    <div class="productInfoContent header">
+      <div>
+        Order Information
+      </div>
+    </div>
+
+    <div class="productInfoContent productList">
+      <div class="listItem" *ngFor="let product of [
+      {'name': 'Yamaha XVS650', 'price': '3299.99'},
+      {'name': 'Yamaha XVS 950', 'price': '13999.99'},
+      {'name': 'Yamaha Stryker XVS 1300', 'price': '11999.99'}
+      ]">
+        <div>
+          {{product.name}}
+        </div>
+        <div>
+          {{product.price}}$
+        </div>
+      </div>
+    </div>
+    <div class="productInfoContent productList">
+      <div class="listItem">
+        <div>
+          Discount
+        </div>
+        <div>
+          99%
+        </div>
+      </div>
+      <div class="listItem">
+        <div>
+          Total
+        </div>
+        <div>
+          292.99$
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary next-step" (click)="payOrder()" style="margin-top: 10px">Pay</button>
+</div>

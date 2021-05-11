@@ -1,0 +1,60 @@
+<div class="list" *ngFor="let payment of payments; let idx = index">
+
+  <div class="info">
+    <div style="display: flex">
+      <div>Order #:</div>
+      <div style="display: flex">
+        {{payment.paymentId}}
+      </div>
+    </div>
+    <div style="display: flex">
+      <div>Price:</div>
+      <div style="display: flex">
+        {{payment.value + " " + payment.currency}}
+      </div>
+    </div>
+    <br/>
+    <div *ngFor="let operation of payment.operation; let operationIdx = index">
+      <div style="display: inline-block">
+        <div class="detail"
+             [ngClass]="{'authorization':'authorization','capture':'capture','cancellation':'cancellation'}[operation | lowercase]">
+          {{operation | capitalize}}
+        </div>
+      </div>
+      <div style="display: flex">
+        <div>Date:</div>
+        <div>{{payment.creationDate[operationIdx]}}</div>
+      </div>
+      <div [ngSwitch]="operation" *ngIf="operationIdx + 1 === payment.operation.length" style="border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    display: inline-grid;">
+        <div *ngIf="operationIdx + 1 === payment.operation.length">
+          Actions:
+        </div>
+        <div *ngSwitchCase="'AUTHORIZATION'">
+          <button (click)="capture(idx)" class="button capture">Capture</button>
+          <button (click)="cancel(idx)" class="button cancel" style="margin-left: 5px">Cancel</button>
+        </div>
+        <div *ngSwitchCase="'CAPTURE'">
+          <button (click)="refund(idx)" class="button cancel">Refund</button>
+        </div>
+        <div *ngSwitchDefault>No available operation</div>
+      </div>
+      <hr *ngIf="operationIdx + 1 < payment.operation.length"/>
+    </div>
+  </div>
+</div>
+
+<!--TODO: smart pagination-->
+<div style="    display: flex;
+    position: relative;
+    justify-content: center;">
+  <div *ngFor="let page of numOfPages" style="    padding: 10px;
+    border: 1px solid;
+    border-radius: 12px;
+margin: 5px;
+">
+    <a href="/payments?page={{page}}">{{page}}</a>
+  </div>
+</div>

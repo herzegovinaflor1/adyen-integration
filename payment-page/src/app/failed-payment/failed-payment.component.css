@@ -1,0 +1,12 @@
+.content {
+  border: 1px solid;
+  justify-content: center;
+  display: flex;
+  padding: 40px;
+}
+
+.text {
+  display: grid;
+  justify-content: center;
+  padding: 10px;
+}

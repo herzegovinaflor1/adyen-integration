@@ -1,0 +1,5 @@
+/data/
+/java-service/.gradle/
+/java-service/build/
+/payment-page/dist/
+/payment-page/node_modules/

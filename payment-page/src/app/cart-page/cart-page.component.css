@@ -1,0 +1,35 @@
+.cartWrapper {
+
+}
+
+.product {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px double #cecece;
+  display: flex;
+  padding: 20px;
+  min-width: 200px;
+  border-radius: 15px;
+}
+
+.productName {
+  margin-top: 30px;
+  font-size: medium;
+}
+
+.productInfo {
+  margin-left: 10px;
+}
+
+.productPrice {
+  font-size: xx-large;
+  font-weight: 600;
+}
+
+.checkout-button {
+  background-color: #ffbb68;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration:none;
+  color: white;
+}

@@ -1,0 +1,39 @@
+version: "2"
+services:
+  web:
+    container_name: payment-web
+    restart: always
+    build: ./payment-page
+    ports:
+      - "${REDIRECT_PAGE_PORT}:${REDIRECT_PAGE_PORT}"
+    links:
+      - app
+  app:
+    container_name: payment-service
+    restart: always
+    build: ./java-service
+    environment:
+      - MONGO_CONNECTION_URL_PARAM=${MONGO_CONNECTION_URL_PARAM}
+      - REDIRECT_PAGE=${REDIRECT_PAGE}
+      - MERCHANT_ACCOUNT=${MERCHANT_ACCOUNT}
+      - SHOPPER_REFERENCE=${SHOPPER_REFERENCE}
+      - SHOPPER_IP=${SHOPPER_IP}
+      - XAPIKey=${XAPIKey}
+      - ISSUE_URL=${ISSUE_URL}
+      - SHOPPER_EMAIL=${SHOPPER_EMAIL}
+    ports:
+      - "${PAYMENT_WEB_PORT}:${PAYMENT_WEB_PORT}"
+      - 8000:8000
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+      - MONGO_INITDB_ROOT_USERNAME=
+      - MONGO_INITDB_ROOT_PASSWORD=
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
